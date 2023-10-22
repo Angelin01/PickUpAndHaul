@@ -128,16 +128,14 @@ public class JobDriver_UnloadYourHauledInventory : JobDriver
 
 		if (TargetB.HasThing)
 		{
-			var carryToContainer = Toils_Haul.CarryHauledThingToContainer();
-			yield return carryToContainer;
+			yield return Toils_Haul.CarryHauledThingToContainer();
 			yield return Toils_Haul.DepositHauledThingInContainer(TargetIndex.B, TargetIndex.None);
-			yield return Toils_Haul.JumpToCarryToNextContainerIfPossible(carryToContainer, TargetIndex.None);
+			yield return Toils_Haul.JumpToCarryToNextContainerIfPossible(Toils_Haul.CarryHauledThingToContainer(), TargetIndex.None);
 		}
 		else
 		{
-			var carryToCell = Toils_Haul.CarryHauledThingToCell(TargetIndex.C);
-			yield return carryToCell;
-			yield return Toils_Haul.PlaceHauledThingInCell(TargetIndex.C, carryToCell, true);
+			yield return Toils_Haul.CarryHauledThingToCell(TargetIndex.C);
+			yield return Toils_Haul.PlaceHauledThingInCell(TargetIndex.C, Toils_Haul.CarryHauledThingToCell(TargetIndex.C), true);
 		}
 
 		//If the original cell is full, PlaceHauledThingInCell will set a different TargetIndex resulting in errors on yield return Toils_Reserve.Release.
