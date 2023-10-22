@@ -122,11 +122,6 @@ public class JobDriver_UnloadYourHauledInventory : JobDriver
 							job.SetTarget(TargetIndex.B, destinationAsThing);
 						}
 					}
-					else
-					{
-						pawn.carryTracker.innerContainer.TryDrop(thing, ThingPlaceMode.Near, thing.stackCount, out var _);
-						EndJobWith(JobCondition.Succeeded);
-					}
 				}
 			}
 		};
